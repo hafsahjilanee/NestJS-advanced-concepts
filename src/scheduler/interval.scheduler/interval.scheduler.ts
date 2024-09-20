@@ -11,6 +11,7 @@ import { INTERVAL_KEY } from '../decorators/interval.decorator';
 export class IntervalScheduler
   implements OnApplicationBootstrap, OnApplicationShutdown
 {
+  private readonly intervals: NodeJS.Timeout[] = [];
   constructor(
     private readonly discoveryService: DiscoveryService,
     private readonly reflector: Reflector,
@@ -43,10 +44,13 @@ export class IntervalScheduler
           return;
         }
 
-        setInterval(() => instance[methodKey](), interval);
+        const intervalRef = setInterval(() => instance[methodKey](), interval);
+        this.intervals.push(intervalRef);
       });
     });
   }
 
-  onApplicationShutdown(signal?: string) {}
+  onApplicationShutdown(signal?: string) {
+    this.intervals.forEach((intervalRef) => clearInterval(intervalRef));
+  }
 }
