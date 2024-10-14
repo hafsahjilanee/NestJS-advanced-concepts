@@ -7,21 +7,26 @@ import { CronModule } from './cron/cron.module';
 import { FibonacciModule } from './fibonacci/fibonacci.module';
 import { HttpClientModule } from './http-client/http-client.module';
 import { TagsModule } from './tags/tags.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { PaymentsModule } from './payments/payments.module';
+import { PaymentsWebhookController } from './payment/payments-webhook.controller';
 
 @Module({
   imports: [
+    EventEmitterModule.forRoot(),
     CoffeesModule,
     SchedulerModule,
     CronModule,
     FibonacciModule,
     HttpClientModule.register({ baseUrl: 'http://nestjs.com' }),
     TagsModule,
+    PaymentsModule,
     //Alternatively
     // HttpClientModule.registerAsync({
     //   useFactory: () => ({ baseUrl: 'http://nestjs.com' }),
     // }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, PaymentsWebhookController],
   providers: [AppService],
 })
 export class AppModule {}
