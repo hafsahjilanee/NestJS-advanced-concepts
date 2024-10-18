@@ -25,9 +25,11 @@
     "@nestjs/event-emitter": "^2.0.4",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.0",
+    "accept-language-parser": "^1.5.0",
     "piscina": "^4.7.0",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "string-format": "^2.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
